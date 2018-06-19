@@ -5,6 +5,9 @@
  */
 package corto_labo;
 
+import GUI.ventana;
+import javax.swing.JFrame;
+
 /**
  *
  * @author LN710Q
@@ -16,6 +19,12 @@ public class Corto_labo {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        JFrame ventana=new JFrame("Inscripciones");
+        ventana.setContentPane(new ventana());
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.setResizable(false);
+        ventana.pack();
+        ventana.setVisible(true);
     }
     
 }
