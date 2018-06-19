@@ -46,7 +46,7 @@ public class ventana extends JPanel{
         si=new JRadioButton("si",true);
         si.setBounds(new Rectangle(100,160,50,heightTF));
         no=new JRadioButton("no");
-        no.setBounds(new Rectangle(120,160,50,heightTF));
+        no.setBounds(new Rectangle(170,160,50,heightTF));
         
         razas=new JComboBox();
         razas.setBounds(100, 200, 120, 30);
