@@ -29,15 +29,15 @@ public class FiltroDao implements metodos<Filtro>{
     private static final Conexion con = Conexion.conectar();
 
     @Override
-    public boolean create(Filtro g) {
+    public boolean create(Filtro f) {
         PreparedStatement PreStat;
         try {
             PreStat = con.getCnx().prepareStatement(SQL_INSERT);
-            PreStat.setString(1, g.getNinscripcion());
-            PreStat.setString(2, g.getRaza());
-            PreStat.setString(5, g.getNombre());
-            PreStat.setString(6, g.getPropietario());
-            PreStat.setInt(3, g.getEdad());
+            PreStat.setString(1, f.getNinscripcion());
+            PreStat.setString(2, f.getRaza());
+            PreStat.setString(5, f.getNombre());
+            PreStat.setString(6, f.getPropietario());
+            PreStat.setInt(3, f.getEdad());
             PreStat.setBoolean(4, true);
             if (PreStat.executeUpdate() > 0){
                 return true;
