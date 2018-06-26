@@ -26,13 +26,13 @@ public class FiltroDao implements metodos<Filtro>{
     private static final String SQL_DELETE = "DELETE FROM mascotas WHERE ninscrpcion = ?";
     private static final String SQL_READ = "SELECT * FROM mascotas";
     private static final String SQL_READALL = "SELECT * FROM mascotas";
-    private static final Conexion con = Conexion.conectar();
+    private static final Conexion conex = Conexion.conectar();
 
     @Override
     public boolean create(Filtro f) {
         PreparedStatement PreStat;
         try {
-            PreStat = con.getCnx().prepareStatement(SQL_INSERT);
+            PreStat = conex.getCnx().prepareStatement(SQL_INSERT);
             PreStat.setString(1, f.getNinscripcion());
             PreStat.setString(2, f.getRaza());
             PreStat.setString(5, f.getNombre());
@@ -46,7 +46,7 @@ public class FiltroDao implements metodos<Filtro>{
             System.out.println(ex.getMessage());
             Logger.getLogger(FiltroDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            con.cerrarConexion();
+            conex.cerrarConexion();
         }
         return false;
     }
@@ -55,7 +55,7 @@ public class FiltroDao implements metodos<Filtro>{
     public boolean delete(Object key) {
         PreparedStatement ps;
         try {
-            ps = con.getCnx().prepareStatement(SQL_DELETE);
+            ps = conex.getCnx().prepareStatement(SQL_DELETE);
             ps.setString(1, key.toString());
             if (ps.executeUpdate() > 0) {
                 return true;
@@ -64,7 +64,7 @@ public class FiltroDao implements metodos<Filtro>{
             System.out.println(ex.getMessage());
             Logger.getLogger(FiltroDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            con.cerrarConexion();
+            conex.cerrarConexion();
         }
         return false;
     }
@@ -74,7 +74,7 @@ public class FiltroDao implements metodos<Filtro>{
         PreparedStatement ps;
         try {
             System.out.println(c.getNinscripcion());
-            ps = con.getCnx().prepareStatement(SQL_UPDATE);
+            ps = conex.getCnx().prepareStatement(SQL_UPDATE);
             ps.setString(1, c.getRaza());
             ps.setInt(2, c.getEdad());
             ps.setBoolean(3, c.getExistencia());
@@ -87,7 +87,7 @@ public class FiltroDao implements metodos<Filtro>{
             System.out.println(ex.getMessage());
             Logger.getLogger(FiltroDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            con.cerrarConexion();
+            conex.cerrarConexion();
         }
         return false;
     }
@@ -98,7 +98,7 @@ public class FiltroDao implements metodos<Filtro>{
         PreparedStatement ps;
         ResultSet rs;
         try {
-            ps = con.getCnx().prepareStatement(SQL_READ);
+            ps = conex.getCnx().prepareStatement(SQL_READ);
             ps.setString(1, key.toString());
             
             rs = ps.executeQuery();
@@ -111,7 +111,7 @@ public class FiltroDao implements metodos<Filtro>{
             System.out.println(ex.getMessage());
             Logger.getLogger(FiltroDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            con.cerrarConexion();
+            conex.cerrarConexion();
         }
         return f;
     }
@@ -122,7 +122,7 @@ public class FiltroDao implements metodos<Filtro>{
         Statement s;
         ResultSet rs;
         try {
-            s = con.getCnx().prepareStatement(SQL_READALL);
+            s = conex.getCnx().prepareStatement(SQL_READALL);
             rs = s.executeQuery(SQL_READALL);
             while(rs.next()){
                 all.add(new Filtro(rs.getString(1), rs.getString(2),rs.getString(3), rs.getInt(4),rs.getString(5) , rs.getBoolean(6)));
@@ -131,7 +131,7 @@ public class FiltroDao implements metodos<Filtro>{
         } catch (SQLException ex) {
            Logger.getLogger(FiltroDao.class.getName()).log(Level.SEVERE, null, ex); 
         } finally {
-            con.cerrarConexion();
+            conex.cerrarConexion();
         }
         return all;
     }
