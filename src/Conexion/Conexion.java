@@ -18,8 +18,8 @@ import java.util.logging.Logger;
  * @author LN710Q
  */
 public class Conexion {
-    private String user;
-    private String pass;
+    private String Usuario;
+    private String contraseña;
     private String driver;
     private String url;
     
@@ -39,15 +39,15 @@ public class Conexion {
         
         try {
             Class.forName(this.driver);
-            cnx = (Connection) DriverManager.getConnection(this.url, this.user,this.pass);
+            cnx = (Connection) DriverManager.getConnection(this.url, this.Usuario,this.contraseña);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     private void cargarCredenciales() {
-        user = "root";
-        pass = "";
+        Usuario = "root";
+        contraseña = "";
         driver = "com.mysql.jdbc.Driver";
         url = "jdbc:mysql://127.0.0.1/SQL";
     }
